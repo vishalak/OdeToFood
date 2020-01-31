@@ -29,9 +29,7 @@ namespace OdeToFood
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
-//            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
@@ -45,7 +43,6 @@ namespace OdeToFood
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using OdeToFood.Core;
 using OdeToFood.Data;
 
-namespace OdeToFood
+namespace OdeToFood.Pages.Restaurants
 {
     public class ListModel : PageModel
     {
         private readonly IConfiguration config;
         private readonly IRestaurantData restaurantData;
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
 
         public string Message { get; set; }
         public IEnumerable<Restaurant> Restaurants { get; set; }
@@ -27,7 +26,7 @@ namespace OdeToFood
         public void OnGet()
         {
             Message = config["Message"];
-            Restaurants = restaurantData.GetAll();
+            Restaurants = restaurantData.GetRestaurantsByName(SearchTerm);
         }
     }
 }

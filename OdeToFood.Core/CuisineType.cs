@@ -5,6 +5,8 @@
         None,
         Mexican,
         Italian,
-        Indian
+        Indian,
+        Chinese,
+        Thai
     }
 }
