@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OdeToFood.Core;
 using OdeToFood.Data;
 
-namespace OdeToFood
+namespace OdeToFood.Pages.Restaurants
 {
     public class EditModel : PageModel
     {
@@ -40,8 +37,13 @@ namespace OdeToFood
 
         public IActionResult OnPost()
         {
-            Restaurant = restaurantData.Update(Restaurant);
-            restaurantData.Commit();
+            if (ModelState.IsValid)
+            {
+                restaurantData.Update(Restaurant);
+                restaurantData.Commit();
+                return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id});
+            }
+            Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
             return Page();
         }
     }
